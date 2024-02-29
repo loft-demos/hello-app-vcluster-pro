@@ -17,7 +17,6 @@ var addr = pflag.String("addr", ":8080", "address to listen on")
 
 func main() {
 	pflag.Parse()
-
 	if *text == "" {
 		log.Fatal("--text option is required!")
 	}
