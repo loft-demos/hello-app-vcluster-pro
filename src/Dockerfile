@@ -16,5 +16,3 @@ ENTRYPOINT ["/http-echo"]
 
 
 
-
-
