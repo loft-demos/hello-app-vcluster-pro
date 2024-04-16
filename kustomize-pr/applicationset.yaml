@@ -1,0 +1,64 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: hello-app-vcluster-pro-pr
+  namespace: argocd
+spec:
+  generators:
+  - pullRequest:
+      github:
+        appSecretName: loft-demo-org-cred
+        # The GitHub organization or user.
+        owner: loft-demos
+        # The Github repository
+        repo: hello-app-vcluster-pro
+        # (optional) use a GitHub App to access the API instead of a PAT.
+        #appSecretName: github-app-repo-creds
+        # Labels is used to filter the PRs that you want to target. (optional)
+        labels:
+        - create-prvcluster
+      requeueAfterSeconds: 30
+  template:
+    metadata:
+      name: 'hello-app-vcluster-pro-{{branch}}-pr{{number}}'
+    spec:
+      syncPolicy:
+        automated:
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+      source:
+        repoURL: 'https://github.com/loft-demos/hello-app-vcluster-pro.git'
+        targetRevision: '{{head_sha}}'
+        path: helm-chart/
+        helm:
+          parameters:
+          - name: "image.repository"
+            value: ghcr.io/loft-demos/hello-app-vcluster-pro
+          - name: "image.tag"
+            value: "{{head_short_sha}}"
+          - name: "image.args.text"
+            value: "Hello from hello-app-vcluster-pro pr-{{number}} commit {{head_short_sha}}"
+          - name: "ingress.hosts[0].host"
+            value: hello-app-vcluster-pro-pr-{{number}}-vcluster-pro.us.demo.dev
+          - name: ingress.hosts[0].paths[0].backend.service.name
+            value: hello-app-vcluster-pro
+          - name: ingress.hosts[0].paths[0].backend.service.port.name
+            value: http
+          - name: ingress.hosts[0].paths[0].path
+            value: /
+          - name: ingress.hosts[0].paths[0].pathType
+            value: prefix
+          - name: "ingress.tls[0].hosts[0]"
+            value: hello-app-vcluster-pro-pr-{{number}}-vcluster-pro.us.demo.dev
+      project: "default"
+      destination:
+        server: https://vcluster-pro.us.demo.dev/kubernetes/project/api-framework/virtualcluster/hello-app-vcluster-pro-pr-{{number}}
+        namespace: preview-hello-world-app
+      info:
+        - name: Preview App Link
+          value: >-
+            https://hello-app-vcluster-pro-pr-{{number}}-vcluster-pro.us.demo.dev
+        - name: GitHub PR
+          value: >-
+            https://github.com/loft-demos/hello-app-vcluster-pro/pull/{{number}}
