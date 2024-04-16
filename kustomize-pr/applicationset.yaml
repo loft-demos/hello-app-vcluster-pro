@@ -20,6 +20,8 @@ spec:
   template:
     metadata:
       name: 'hello-app-vcluster-pro-{{branch}}-pr{{number}}'
+      annotations:
+        notifications.argoproj.io/subscribe.app-deployed.github: ""
     spec:
       syncPolicy:
         automated:
