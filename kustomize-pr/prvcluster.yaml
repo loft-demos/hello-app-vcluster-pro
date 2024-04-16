@@ -4,3 +4,4 @@ metadata:
   name: pullrequest-vcluster
 spec:
   repo: hello-app-vcluster-pro
+  pr_number: 1
