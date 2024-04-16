@@ -30,4 +30,11 @@ data:
       pullRequestComment:
         content: |
           Application {{.app.metadata.name}} is now running new version of deployments manifests.
-          See more here: {{.context.argocdUrl}}/applications/{{.app.metadata.name}}?operation=true    
+          See more here: {{.context.argocdUrl}}/applications/{{.app.metadata.name}}?operation=true
+  trigger.on-deployed: |
+    - description: Application is synced and healthy. Triggered once per commit.
+      oncePer: app.status.operationState?.syncResult?.revision
+      send:
+      - app-deployed
+      when: app.status.operationState != nil and app.status.operationState.phase in ['Succeeded']
+        and app.status.health.status == 'Healthy'
