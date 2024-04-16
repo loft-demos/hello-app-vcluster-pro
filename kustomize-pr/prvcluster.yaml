@@ -1,7 +1,7 @@
 apiVersion: demo.loft.sh/v1alpha1
 kind: PRvCluster
 metadata:
-  name: pullrequest-vcluster
+  name: prvcluster
 spec:
   repo: hello-app-vcluster-pro
   pr_number: 1
