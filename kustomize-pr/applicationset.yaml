@@ -21,7 +21,7 @@ spec:
     metadata:
       name: 'hello-app-vcluster-pro-{{branch}}-pr{{number}}'
       annotations:
-        notifications.argoproj.io/subscribe.app-deployed.github: ""
+        notifications.argoproj.io/subscribe.on-deployed.github: ""
     spec:
       syncPolicy:
         automated:
