@@ -23,7 +23,6 @@ spec:
       annotations:
         notifications.argoproj.io/subscribe.github: ""
         notifications.argoproj.io/subscribe.on-deployed.github: ""
-        notifications.argoproj.io/subscribe.app-deployed.github: ""
     spec:
       syncPolicy:
         automated:
