@@ -4,8 +4,6 @@ metadata:
   name: argocd-notifications-cm
   namespace: argocd
 data:
-  context: |
-    argocdUrl: "{{.context.argocdUrl}}"
   service.github: |
     appID: 410217 
     installationID: 43032092
@@ -18,15 +16,8 @@ data:
       revisionPath: "{{.app.spec.source.targetRevision}}"
       status:
         state: success
-        label: "continuous-delivery/{{.app.metadata.name}}"
+        label: "argo-cd/{{.app.metadata.name}}"
         targetURL: "{{.context.argocdUrl}}/applications/{{.app.metadata.name}}?operation=true"
-      deployment:
-        state: success
-        environment: dev
-        environmentURL: "https://{{.app.metadata.name}}.example.com"
-        logURL: "{{.context.argocdUrl}}/applications/{{.app.metadata.name}}?operation=true"
-        requiredContexts: []
-        autoMerge: true
       pullRequestComment:
         content: |
           Application {{.app.metadata.name}} is now running new version of deployments manifests.
