@@ -64,13 +64,3 @@ spec:
         - name: GitHub PR
           value: >-
             https://github.com/loft-demos/hello-app-vcluster-pro/pull/{{number}}
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: loft-demo-org-cred
-  namespace: argocd
-  labels:
-    argocd.argoproj.io/secret-type: repo-creds
-    loft.sh/project-secret-name: loft-demo-org-cred
-type: Opaque
