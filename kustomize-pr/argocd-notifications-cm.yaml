@@ -4,8 +4,6 @@ metadata:
   name: argocd-notifications-cm
   namespace: argocd
 data:
-  context: |
-    argocdUrl: "REPLACE_ARGOCD_URL"
   service.github: |
     appID: 410217 
     installationID: 43032092
