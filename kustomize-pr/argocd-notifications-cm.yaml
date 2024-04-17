@@ -15,14 +15,14 @@ data:
       Application {{.app.metadata.name}} is now running new version of deployments manifests.
     github:
       repoURLPath: "{{.app.spec.source.repoURL}}"
-      revisionPath: "{{.app.status.operationState.syncResult.revision}}"
+      revisionPath: "{{.app.spec.source.targetRevision}}"
       status:
         state: success
         label: "continuous-delivery/{{.app.metadata.name}}"
         targetURL: "{{.context.argocdUrl}}/applications/{{.app.metadata.name}}?operation=true"
       deployment:
         state: success
-        environment: production
+        environment: dev
         environmentURL: "https://{{.app.metadata.name}}.example.com"
         logURL: "{{.context.argocdUrl}}/applications/{{.app.metadata.name}}?operation=true"
         requiredContexts: []
