@@ -29,13 +29,3 @@ data:
       - app-deployed
       when: app.status.operationState != nil and app.status.operationState.phase in ['Succeeded']
         and app.status.health.status == 'Healthy'
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: loft-demo-org-cred
-  namespace: argocd
-  labels:
-    argocd.argoproj.io/secret-type: repo-creds
-    loft.sh/project-secret-name: loft-demo-org-cred
-type: Opaque
