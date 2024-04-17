@@ -42,7 +42,7 @@ spec:
           - name: "image.args.text"
             value: "Hello from hello-app-vcluster-pro pr-{{number}} commit {{head_short_sha}}"
           - name: "ingress.hosts[0].host"
-            value: hello-app-vcluster-pro-pr-{{number}}-vcluster-pro.us.demo.dev
+            value: hello-app-vcluster-pro-pr-{{number}}-prvcluster.us.demo.dev
           - name: ingress.hosts[0].paths[0].backend.service.name
             value: hello-app-vcluster-pro
           - name: ingress.hosts[0].paths[0].backend.service.port.name
@@ -52,7 +52,7 @@ spec:
           - name: ingress.hosts[0].paths[0].pathType
             value: prefix
           - name: "ingress.tls[0].hosts[0]"
-            value: hello-app-vcluster-pro-pr-{{number}}-vcluster-pro.us.demo.dev
+            value: hello-app-vcluster-pro-pr-{{number}}-prvcluster.us.demo.dev
       project: "default"
       destination:
         name: 'in-cluster'
@@ -60,7 +60,7 @@ spec:
       info:
         - name: Preview App Link
           value: >-
-            https://hello-app-vcluster-pro-pr-{{number}}-vcluster-pro.us.demo.dev
+            https://hello-app-vcluster-pro-pr-{{number}}-prvcluster.us.demo.dev
         - name: GitHub PR
           value: >-
             https://github.com/loft-demos/hello-app-vcluster-pro/pull/{{number}}
