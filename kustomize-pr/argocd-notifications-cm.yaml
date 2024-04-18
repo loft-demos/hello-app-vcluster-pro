@@ -20,8 +20,8 @@ data:
         targetURL: "{{.context.argocdUrl}}/applications/{{.app.metadata.name}}?operation=true"
       pullRequestComment:
         content: |
-          Application {{.app.metadata.name}} has been deployed and is available at: {{.context.helloAppUrl}}.
-          See more in the Argo CD instance here: {{.context.argocdUrl}}/applications/{{.app.metadata.name}}?operation=true
+          The application code for this pull requests has been deployed and is available at: [{{.app.metadata.name}}]({{.context.helloAppUrl}}).
+          For possible deployment issues or for more info, view in the pull request specific [Argo CD instance] ({{.context.argocdUrl}}/applications/{{.app.metadata.name}}?operation=true)
   trigger.on-deployed: |
     - description: Application is synced and healthy. Triggered once per commit.
       oncePer: app.status.operationState?.syncResult?.revision
