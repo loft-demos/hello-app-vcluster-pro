@@ -1,8 +1,7 @@
 apiVersion: demo.loft.sh/v1alpha1
-kind: PRvCluster
+kind: XPRvCluster
 metadata:
   name: prvcluster
-  namespace: loft-p-api-framework
 spec:
   repo: hello-app-vcluster-pro
   pr_number: 1
