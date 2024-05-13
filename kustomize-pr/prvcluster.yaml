@@ -6,4 +6,5 @@ metadata:
 spec:
   repo: hello-app-vcluster-pro
   project: api-framework
+  templateName: pull-request-vcluster
   pr_number: 1
